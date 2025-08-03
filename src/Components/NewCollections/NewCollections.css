@@ -1,0 +1,64 @@
+:root {
+  --color-primary: #DB4444; /* Red from logo & underline */
+  --color-secondary: #F4A261; /* Golden from logo */
+
+  --color-bg: #FFFFFF;
+  --color-border: #E5E7EB;
+
+  --color-heading: #4e4e4e; 
+  --color-body: #6B6B6B; 
+  --color-muted: #9CA3AF;
+
+  --color-error: #DB4444; 
+}
+.new-collections{
+   min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap:10px;
+    margin-top: 50px;;
+    padding:0 20px;
+}
+.new-collections h1{
+    text-align: center;
+    color:#1B1B1B;
+
+}
+.new-collections hr{
+    width: 200px;
+    color: var(--color-heading);
+    background:var(--color-body);
+    height:6px;
+}
+.new-collections .collections-item-container{
+  width: 80%;
+  max-width: 1200px;;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    gap:40px;
+}
+
+@media (max-width: 768px) {
+  .new-collections .collections-item-container {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr ;
+  }
+}
+@media (max-width: 550px) {
+  .new-collections h1{
+    font-size: 1.6rem;
+  }
+  .new-collections .collections-item-container{
+  width: 95%;
+  max-width: 1200px;;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    gap:20px;
+}
+
+
+}

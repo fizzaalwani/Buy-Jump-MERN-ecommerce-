@@ -1,0 +1,151 @@
+:root {
+  --color-primary: #DB4444; /* Red from logo & underline */
+  --color-secondary: #F4A261; /* Golden from logo */
+
+  --color-bg: #FFFFFF;
+  --color-border: #E5E7EB;
+
+  /* --color-heading: #000000; For bold text */
+  --color-heading: #4e4e4e; 
+  --color-body: #6B6B6B; /* Menu default text */
+  --color-muted: #9CA3AF;
+
+  --color-error: #DB4444; /* Same as primary for badge */
+}
+
+/* Navbar Container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo img {
+  width: 40px;
+  height: auto;
+}
+
+.nav-logo p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  letter-spacing: 0.5px;
+}
+
+/* Menu */
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.nav-menu li {
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 4px;
+  font-weight: 500;
+  color: var(--color-body);
+  transition: color 0.3s;
+}
+
+.nav-menu li:hover {
+  color: var(--color-heading);
+}
+
+.nav-menu li.active {
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.nav-menu li.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-primary);
+  border-radius: 1px;
+}
+
+/* Login Button */
+.nav-login-cart {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-login-cart button {
+  background-color: transparent;
+  color: var(--color-body);
+  border: 1px solid var(--color-body);
+  padding: 8px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-login-cart button:hover {
+  background-color: var(--color-heading);
+  color: #fff;
+}
+
+/* Cart */
+.cart-icon {
+  position: relative;
+}
+
+.cart-icon img {
+  width: 30px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: var(--color-error);
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .navbar {
+    padding: 12px 15px;
+  }
+
+  .nav-logo img {
+    width: 34px;
+  }
+
+  .nav-logo p {
+    display: none;
+  }
+
+  .nav-login-cart button {
+    padding: 6px 12px;
+  }
+
+  .cart-icon img {
+    width: 26px;
+  }
+}

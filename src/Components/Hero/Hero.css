@@ -1,0 +1,141 @@
+:root {
+  --color-primary: #DB4444; /* Red from logo & underline */
+  --color-secondary: #F4A261; /* Golden from logo */
+
+  --color-bg: #FFFFFF;
+  --color-border: #E5E7EB;
+
+  --color-heading: #4e4e4e; 
+  --color-body: #6B6B6B; 
+  --color-muted: #9CA3AF;
+
+  --color-error: #DB4444; 
+}
+
+.hero-section {
+  height: 100vh;
+  background: linear-gradient(180deg, #fde1ff, #e1ffea22 60%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8%;
+  gap: 40px;
+}
+
+/* Left side */
+.left-hero {
+  flex: 1;
+}
+
+.left-hero p:first-child {
+  font-size: 1rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.left-hero p:nth-child(2) {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--color-heading);
+  line-height: 1.3;
+  color: #1B1B1B;
+}
+
+.left-hero span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.left-hero span img {
+  width: 55px;
+  height: auto;
+  
+}
+
+/* Button */
+.left-hero button {
+  margin-top: 25px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.left-hero button:hover {
+  background-color: #b73535;
+}
+
+/* Right side */
+.right-hero {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.right-hero img {
+  width: 80%;
+  max-width: 450px;
+  height: auto;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .hero-section {
+    /* flex-direction: column; */
+    text-align: center;
+    padding: 40px 5%;
+    height: auto;
+  }
+
+  .left-hero {
+    order: 2;
+  }
+
+  .right-hero {
+    order: 1;
+  }
+
+  .left-hero p:nth-child(2) {
+    font-size: 2rem;
+  }
+
+  .right-hero img {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 576px) {
+     .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 5%;
+    height: auto;
+  }
+  .left-hero p:nth-child(2) {
+    font-size: 1.5rem;
+  }
+  .left-hero span img {
+  width: 35px;
+  height: auto;
+  
+}
+
+  .left-hero button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .right-hero img {
+    max-width: 300px;
+  }
+}
