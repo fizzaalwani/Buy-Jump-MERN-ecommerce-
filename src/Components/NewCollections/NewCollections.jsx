@@ -11,7 +11,7 @@ function NewCollections() {
         <div className="collections-item-container">
             {
                 collection.map((item,index)=>{
-                    return <Item key={index} img={item.image} name={item.name} new_price={item.new_price} old_price={item.old_price}/>
+                    return <Item key={index} id={item.id} img={item.image} name={item.name} new_price={item.new_price} old_price={item.old_price}/>
                 })
             }
         </div>

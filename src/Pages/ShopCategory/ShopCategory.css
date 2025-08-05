@@ -1,0 +1,110 @@
+:root {
+  --color-primary: #DB4444; /* Red from logo & underline */
+  --color-secondary: #F4A261;
+  --color-bg: #FFFFFF;
+  --color-border: #E5E7EB;
+  --color-heading: #4e4e4e;
+  --color-body: #6B6B6B;
+  --color-muted: #9CA3AF;
+  --color-error: #DB4444;
+}
+.shopcategory{
+    max-width: 80%;
+    margin: 50px auto;
+    
+}
+/* Banner */
+.category-banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+/* Sorting section */
+.sort {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sort p {
+  color: var(--color-body);
+  font-size: 0.95rem;
+}
+
+.sort button {
+  background-color: transparent;
+  color: var(--color-body);
+  border: 1.5px solid var(--color-muted);
+  padding: 7px 13px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.1s ease;
+}
+
+.sort button:hover {
+  /* background-color: var(--color-primary);
+  color:#fff;
+  border:none; */
+  transform: scale(1.02);
+}
+
+/* Products Grid */
+.shopcategory-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .shopcategory-container {
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+   .shopcategory{
+    max-width: 90%;
+    margin: 20px auto;
+  }
+  .sort {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sort button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .shopcategory{
+    max-width: 95%;
+    margin: 20px auto;
+  }
+  .shopcategory-container {
+    grid-template-columns:1fr 1fr;
+    gap: 15px;
+  }
+  .category-banner img {
+  width: 100%;
+  height: 30%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+}

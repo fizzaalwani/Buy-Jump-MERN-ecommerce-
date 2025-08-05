@@ -1,11 +1,12 @@
 import React from 'react'
 import './Item.css'
+import { Link } from 'react-router-dom'
 
 function Item(props) {
   return (
     <div className='item'>
-       <img src={props.img} alt="" />
-       <p>{props.name}</p>
+      <Link to={`/product/${props.id}`} style={{textDecoration:"none"}}><img onClick={window.scrollTo(0,0)}src={props.img} alt="" />
+       <p className='item-name'>{props.name}</p>
        <div className="item-prices">
         <div className="item-new-price">
             ${props.new_price}
@@ -13,7 +14,7 @@ function Item(props) {
          <div className="item-old-price">
             ${props.old_price}
         </div>
-       </div>
+       </div></Link> 
     </div>
   )
 }

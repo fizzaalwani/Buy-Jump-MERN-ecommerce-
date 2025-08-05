@@ -1,0 +1,33 @@
+:root {
+  --color-primary: #DB4444; 
+  --color-secondary: #F4A261; 
+
+  --color-bg: #FFFFFF;
+  --color-border: #E5E7EB;
+
+ 
+  --color-heading: #4e4e4e; 
+  --color-body: #6B6B6B; 
+  --color-muted: #9CA3AF;
+
+  --color-error: #DB4444; 
+}
+.cart{
+    max-width: 80%;
+    margin: 20px auto;
+}
+
+@media(max-width:1200px){
+    .cart{
+    max-width: 90%;
+    margin: 20px auto;
+}
+
+}
+@media(max-width:550px){
+    .cart{
+    max-width: 90%;
+    margin: 20px auto;
+}
+
+}

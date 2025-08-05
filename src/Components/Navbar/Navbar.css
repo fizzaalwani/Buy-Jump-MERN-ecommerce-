@@ -21,6 +21,7 @@
   padding: 15px 30px;
   background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
+  position: relative;
 }
 
 /* Logo */
@@ -41,7 +42,9 @@
   color: var(--color-heading);
   letter-spacing: 0.5px;
 }
-
+.menu-toggle{
+  display: none;
+}
 /* Menu */
 .nav-menu {
   display: flex;
@@ -124,7 +127,22 @@
 /* Responsive */
 @media (max-width: 768px) {
   .nav-menu {
+    flex-direction: column;
+    position: absolute;
+    gap:10px;
+    background-color:#fff;
+    box-shadow: -3px -3px 32px #9CA3AF;
+    right:28%;
+    top: 80%;
+    padding: 10px 30px;;
+    border-radius: 18px;
     display: none;
+  }
+   .nav-menu.open {
+    display: flex;
+  }
+  .menu-toggle{
+    display: block;
   }
 }
 

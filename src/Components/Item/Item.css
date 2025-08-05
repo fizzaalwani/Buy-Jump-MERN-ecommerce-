@@ -83,7 +83,12 @@
     max-width: 300px;
   }
 }
-
+@media (max-width: 550px) {
+  .item-name{
+    font-size: 0.7rem;
+  }
+}
+ 
 /* For very small screens */
 @media (max-width: 400px) {
   .item {
