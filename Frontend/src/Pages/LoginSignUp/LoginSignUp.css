@@ -1,0 +1,134 @@
+:root {
+  --color-primary: #DB4444; /* Red from logo & underline */
+  --color-secondary: #F4A261; /* Golden from logo */
+
+  --color-bg: #FFFFFF;
+  --color-border: #E5E7EB;
+
+  --color-heading: #4e4e4e; 
+  --color-body: #6B6B6B; 
+  --color-muted: #9CA3AF;
+
+  --color-error: #DB4444; 
+}
+
+
+
+.loginSignUp {
+  max-width: 400px;
+  margin: 60px auto;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 30px 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.loginSignUp h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  text-align: center;
+}
+
+
+.loginSignUp .form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.loginSignUp input[type="text"],
+.loginSignUp input[type="email"],
+.loginSignUp input[type="password"] {
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  font-size: 1rem;
+  color: var(--color-heading);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.loginSignUp input:focus {
+  border-color: var(--color-primary);
+}
+
+/* Button */
+.loginSignUp button {
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginSignUp button:hover {
+  background-color: #b73535;
+}
+
+/* Account Exists */
+.accountExists {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-body);
+}
+.accountExists p{
+  /* background-color: #4e4e4e; */
+  padding-bottom: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.accountExists span {
+  color: var(--color-primary);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.accountExists span:hover {
+  text-decoration: underline;
+}
+
+
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--color-body);
+}
+
+.checkbox input {
+  margin-top: 3px;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .loginSignUp {
+    max-width: 90%;
+    margin: 40px auto;
+    padding: 20px 15px;
+  }
+
+  .loginSignUp h1 {
+    font-size: 1.5rem;
+  }
+
+  .loginSignUp button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .checkbox {
+    font-size: 0.8rem;
+  }
+}

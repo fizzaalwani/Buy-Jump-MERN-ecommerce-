@@ -1,0 +1,56 @@
+:root {
+  --primary-color: #ff4141; /* Matches your site’s accent */
+  --text-color: #333;
+  --muted-color: #777;
+  --bg-color: #f9f9f9;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--muted-color);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+.breadcrumb img {
+  width: 10px;
+  height: auto;
+  opacity: 0.6;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--primary-color);
+}
+
+.breadcrumb span {
+  color: var(--muted-color);
+}
+
+@media (max-width: 768px) {
+  .breadcrumb {
+    text-align: left;
+    font-size: 13px;
+    padding: 0px 0px;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .breadcrumb {
+    font-size: 12px;
+    justify-content: left;
+    text-align: left;
+  }
+}
