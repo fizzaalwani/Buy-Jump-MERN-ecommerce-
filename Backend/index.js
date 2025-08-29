@@ -8,9 +8,10 @@ const port = 4000;
 const db = require('./config/connection');
 const productModel = require('./models/productmodel');
 const usermodel = require('./models/usermodel');
-const subsModel=require('./models/subscribers')
+const subsModel = require('./models/subscribers')
 const bcrypt = require('bcrypt');
-const sendEmail=require('./utils/emailService')
+const sendEmail = require('./utils/emailService');
+const reviewModel = require('./models/reviewmodel');
 require('dotenv').config()
 
 
@@ -198,9 +199,9 @@ app.get('/popularinwomen', async (req, res) => {
 app.get('/relatedProducts/:category/:productId', async (req, res) => {
     try {
         // let products = await productModel.find({ category: req.params.category }).limit(4)
-        let products=await productModel.aggregate([
-            {$match:{category:req.params.category,_id:{$ne:req.params.productId}}},
-            {$sample:{size:4}}
+        let products = await productModel.aggregate([
+            { $match: { category: req.params.category, _id: { $ne: req.params.productId } } },
+            { $sample: { size: 4 } }
         ])
         res.json(products)
     } catch (err) {
@@ -212,40 +213,84 @@ app.get('/relatedProducts/:category/:productId', async (req, res) => {
 })
 
 //add subscribers
-app.post('/add/subscriber',async(req, res)=>{
-    try{
-     const email=req.body.email
-      let existingSubscribor=await subsModel.findOne({email})
-      if(existingSubscribor){
-        return res.json({message:"user is already subscribed"})
-      }
+app.post('/add/subscriber', async (req, res) => {
+    try {
+        const email = req.body.email
+        let existingSubscribor = await subsModel.findOne({ email })
+        if (existingSubscribor) {
+            return res.json({ message: "user is already subscribed" })
+        }
 
-      await subsModel.create({email:email})
+        await subsModel.create({ email: email })
 
-      return res.json({message:"Subscriber added"})
-    }catch(err){
-         res.status(500).json({
+        return res.json({ message: "Subscriber added" })
+    } catch (err) {
+        res.status(500).json({
             success: false,
             message: err.message
         })
     }
-     
+
 })
-app.post('/sendMail',async(req,res)=>{
-    try{
-   const {subject,message}=req.body
+app.post('/sendMail', async (req, res) => {
+    try {
+        const { subject, message } = req.body
 
-    const subscribers=await subsModel.find({},'email -_id')
-    let recipients=subscribers.map(s=>s.email)
+        const subscribers = await subsModel.find({}, 'email -_id')
+        let recipients = subscribers.map(s => s.email)
 
-    sendEmail(recipients,"Subscriber alert from Buy-Jump","We are delighted to imform you of our latest summer collection that has been introduced with an exclusive discount of 15% for our new subscribers say hi to fizza")
+        sendEmail(recipients, "Subscriber alert from Buy-Jump", "We are delighted to imform you of our latest summer collection that has been introduced with an exclusive discount of 15% for our new subscribers say hi to fizza")
 
-    res.json({ success: true, message: 'Mail sent to all subscribers' });
-    }catch(err){
-          res.status(500).json({ success: false, message: err.message });
+        res.json({ success: true, message: 'Mail sent to all subscribers' });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
     }
-   
-    
+})
+
+//reviews
+app.post('/review/add', async (req, res) => {
+    try {
+        const { name, email, review, rating, productId } = req.body
+        if (!email || !review) {
+            return res.json({ message: "Please fill all the required fields" })
+        }
+
+        let newReview = await reviewModel.create({
+            name: name || null,
+            email,
+            review,
+            rating,
+            productId
+        })
+        // console.log("_id : ",newReview._id)
+        // console.log("id : ",newReview.id)
+        if (newReview) return res.status(201).json({ success: true, message: "review added" })
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+})
+app.get('/review/get/:productId', async (req, res) => {
+    try {
+        const productId = req.params.productId
+        let existingProduct = await productModel.findOne({ _id: productId })
+        if (!existingProduct) return res.status(404).json({ success: false, message: "Product not found" })
+        let reviews = await reviewModel.find({ productId: productId, approved: false })
+        res.status(200).json({ success: true, reviews })
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+})
+app.get('/admin/review/approve/:reviewId', async (req, res) => {
+    try {
+        const reviewId = req.params.reviewId
+        const existingReview = await reviewModel.findById(reviewId )
+        if (!existingReview) return res.status(404).json({ success: false, message: "Review not found" })
+        existingReview.approved = true
+        await existingReview.save()
+        res.json({success:true,messgae:"review approved"})
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
 })
 //Endpoints for  users
 app.post("/user/signup", async (req, res) => {
@@ -333,13 +378,13 @@ app.post('/addtocart', verifyUser, async (req, res) => {
         if (!user.cartData) user.cartData = {};
         user.cartData[pId] = Number((user.cartData[pId] || 0) + Number(quantity))
 
-        
-        user.markModified('cartData'); 
+
+        user.markModified('cartData');
         console.log(user.cartData[pId])
         await user.save();
 
         res.json({ success: true, message: "Item added to cart" });
-       
+
     } catch (err) {
         console.log(err)
         res.status(500).json({
@@ -350,26 +395,26 @@ app.post('/addtocart', verifyUser, async (req, res) => {
 
 })
 app.post('/removefromcart', verifyUser, async (req, res) => {
-    try{
-  const { pId, quantity } = req.body
+    try {
+        const { pId, quantity } = req.body
 
-    let user = await usermodel.findOne({ _id: req.user.id })
+        let user = await usermodel.findOne({ _id: req.user.id })
 
-    if (user.cartData[pId] > 0) {
-        user.cartData[pId] = Number(user.cartData[pId] - quantity)
-    }
-    user.markModified('cartData'); 
+        if (user.cartData[pId] > 0) {
+            user.cartData[pId] = Number(user.cartData[pId] - quantity)
+        }
+        user.markModified('cartData');
 
-    await user.save();
+        await user.save();
 
-    res.json({ success: true, message: "Item removed from the cart" });
-    }catch(err){
-         res.status(500).json({
+        res.json({ success: true, message: "Item removed from the cart" });
+    } catch (err) {
+        res.status(500).json({
             success: false,
             message: err.message || "Error removing cart Items"
-        }) 
+        })
     }
-  
+
 })
 app.get('/getCartItems', verifyUser, async (req, res) => {
     try {
