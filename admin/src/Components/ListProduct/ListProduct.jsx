@@ -10,7 +10,7 @@ function ListProduct() {
 
   const fetchProducts = async () => {
     try {
-      let products = await axios.get("http://localhost:4000/display")
+      let products = await axios.get("http://localhost:4000/product/display")
       if (products.data.success) {
         setProducts(products.data.products)
         console.log(products.data.products)
@@ -31,7 +31,7 @@ function ListProduct() {
     if (!window.confirm("Are you sue you want to delete all products"))
       return
 
-    await axios.delete("http://localhost:4000/display/deleteAllProducts").then((res) => {
+    await axios.delete("http://localhost:4000/display/product/deleteAll").then((res) => {
       if (res.success) {
         setProducts([])
       } else {
@@ -49,7 +49,7 @@ function ListProduct() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/removeproduct/${id}`).then((res) => {
+      await axios.delete(`http://localhost:4000/product/remove/${id}`).then((res) => {
         if (res.data.success) {
           let deletedProduct = res.data.product
          

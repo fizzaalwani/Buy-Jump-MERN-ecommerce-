@@ -16,9 +16,10 @@ function Product() {
   const [relatedProducts,setRelatedProducts]=useState([])
 
     useEffect(()=>{
+      document.title=selectedProduct.name
       const fetchRelatedProducts=async()=>{
        try {
-        let response = await axios.get(`http://localhost:4000/relatedProducts/${selectedProduct.category}/${selectedProduct._id}`);
+        let response = await axios.get(`http://localhost:4000/product/relatedProducts/${selectedProduct.category}/${selectedProduct._id}`);
         setRelatedProducts(response.data);
       } catch (err) {
         console.error(err);

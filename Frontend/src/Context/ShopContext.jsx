@@ -17,7 +17,7 @@ function ShopContextProvider(props) {
     })
 
     if(localStorage.getItem('auth-token')){
-      let response=await axios.post("http://localhost:4000/addtocart",{ pId: id, quantity: 1 },{
+      let response=await axios.post("http://localhost:4000/cart/add",{ pId: id, quantity: 1 },{
         headers:{
           'auth-token':localStorage.getItem('auth-token'),
           "Content-Type":"application/json"
@@ -38,7 +38,7 @@ function ShopContextProvider(props) {
 
     });
      if(localStorage.getItem('auth-token')){
-      let response=await axios.post("http://localhost:4000/removefromcart",{ pId: id, quantity },{
+      let response=await axios.post("http://localhost:4000/cart/remove",{ pId: id, quantity },{
         headers:{
           'auth-token':localStorage.getItem('auth-token'),
           "Content-Type":"application/json"
@@ -70,7 +70,7 @@ function ShopContextProvider(props) {
   useEffect(() => {
     const getAllProducts = async () => {
       try {
-        let response = await axios.get("http://localhost:4000/display");
+        let response = await axios.get("http://localhost:4000/product/display");
         setProducts(response.data.products);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -78,7 +78,7 @@ function ShopContextProvider(props) {
     };
     const getCartProducts=async()=>{
       if(localStorage.getItem('auth-token')){
-        let response=await axios.get("http://localhost:4000/getCartItems",{
+        let response=await axios.get("http://localhost:4000/cart/get",{
           headers:{
             'auth-token':localStorage.getItem('auth-token')
           }

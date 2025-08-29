@@ -12,7 +12,7 @@ function NewCollections() {
   useEffect(()=>{
     const fetchNewCollection=async()=>{
       try{
-      let response=await axios.get("http://localhost:4000/newcollection")
+      let response=await axios.get("http://localhost:4000/product/newcollection")
       setnewcollection(response.data)
       // console.log(response.data)
       }catch(err){

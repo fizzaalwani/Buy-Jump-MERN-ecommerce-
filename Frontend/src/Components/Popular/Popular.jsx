@@ -10,7 +10,7 @@ function Popular() {
 
   useEffect(()=>{
     const fetchPopular=async()=>{
-      let response=await axios.get("http://localhost:4000/popularinwomen")
+      let response=await axios.get("http://localhost:4000/product/popularinwomen")
         setPopular(response.data)
         console.log(response.data)
       

@@ -40,7 +40,7 @@ function AddProduct() {
   }
 
   const uploadImages = (images) => {
-    return axios.post("http://localhost:4000/upload", images, {
+    return axios.post("http://localhost:4000/product/upload", images, {
       headers: {
         "Content-Type": "multipart/form-data"
       }
@@ -48,7 +48,7 @@ function AddProduct() {
   }
 
   const saveProduct = (product) => {
-    return axios.post("http://localhost:4000/addproduct", product)
+    return axios.post("http://localhost:4000/product/add", product)
   }
 
   const handleSubmit = async (e) => {
