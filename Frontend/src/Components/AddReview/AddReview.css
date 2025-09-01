@@ -1,0 +1,73 @@
+.add-review{
+    padding: 20px 0;
+    width: 100%;
+}
+.add-review .add{
+    float: right;
+    padding:8px 14px;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 3px var(--color-body);
+
+}
+.add-review .form{
+    margin-top: 20px;;
+    padding:16px;
+    /* background-color:var(--color-border); */
+    padding:16px 20px;
+    transition: display 1s;
+    width: 100%;
+}
+.add-review label{
+    color:var(--color-heading);
+    font-weight: 600;
+    padding-top: 6px;
+    padding-bottom: 4px;
+}
+.add-review .form form{
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+    width: 100%;
+   
+}
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.add-review .form input,.add-review .form textarea{
+    padding: 6px 12px;
+    border:1px solid var(--color-border);
+     width: 100%;  
+}
+.add-review .submit{
+    background-color: #000;
+    color:#ffffff;
+    border:none;
+    padding:10px 20px;
+}
+.add-review .rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.add-review .rating span{
+    display: inline;
+}
+.add-review .star {
+  font-size: 18px;
+  display: inline;
+  cursor: pointer;
+  color: #ccc; /* default grey */
+}
+
+.add-review .star.star-filled {
+  color: #000; /* your fill color */
+}
+
+
+@media(max-width:500px) {
+    .add-review .form{
+        padding: 0px 0px;;
+    }
+}

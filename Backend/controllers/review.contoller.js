@@ -3,10 +3,12 @@ const reviewModel=require('../models/reviewmodel')
 
 module.exports.getReview=async (req, res) => {
     try {
+        console.log("hey im running")
         const productId = req.params.productId
+        console.log(productId)
         let existingProduct = await productModel.findOne({ _id: productId })
         if (!existingProduct) return res.status(404).json({ success: false, message: "Product not found" })
-        let reviews = await reviewModel.find({ productId: productId, approved: false })
+        let reviews = await reviewModel.find({ productId: productId, approved: true })
         res.status(200).json({ success: true, reviews })
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
@@ -16,6 +18,7 @@ module.exports.getReview=async (req, res) => {
 module.exports.addReview= async (req, res) => {
     try {
         const { name, email, review, rating, productId } = req.body
+        console.log(req.body)
         if (!email || !review) {
             return res.json({ message: "Please fill all the required fields" })
         }

@@ -22,6 +22,6 @@ const reviewSchema=mongoose.Schema({
     rating:{
         type:Number
     }
-})
+},{timeStamps:true})
 
 module.exports=mongoose.model("review",reviewSchema)
