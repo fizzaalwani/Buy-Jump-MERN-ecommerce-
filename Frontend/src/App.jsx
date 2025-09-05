@@ -12,7 +12,7 @@ import men_banner from './assets/Frontend_Assets/banner_mens.png'
 import women_banner from './assets/Frontend_Assets/banner_women.png'
 import kids_banner from './assets/Frontend_Assets/banner_kids.png'
 import Footer from './Components/Footer/Footer'
-import Cart from './Pages/Cart/cart'
+import Cart from './Pages/Cart/Cart'
 import NotFound from './Components/NotFound/NotFound'
 
 
