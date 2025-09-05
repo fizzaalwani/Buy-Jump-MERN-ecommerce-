@@ -10,6 +10,7 @@ import axios from 'axios'
 import AddReview from '../../Components/AddReview/AddReview'
 
 function Product() {
+  const {url}=useContext(ShopContext)
   const products=useContext(ShopContext).products
   const productData=useParams().productId
   const selectedProduct=products.find((p)=> String(p.id)===String(productData))
@@ -20,7 +21,7 @@ function Product() {
       document.title=selectedProduct.name
       const fetchRelatedProducts=async()=>{
        try {
-        let response = await axios.get(`http://localhost:4000/product/relatedProducts/${selectedProduct.category}/${selectedProduct._id}`);
+        let response = await axios.get(`${url}/product/relatedProducts/${selectedProduct.category}/${selectedProduct._id}`);
         setRelatedProducts(response.data);
       } catch (err) {
         console.error(err);

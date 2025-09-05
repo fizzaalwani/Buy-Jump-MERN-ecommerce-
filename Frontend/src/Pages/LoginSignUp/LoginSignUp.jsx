@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './LoginSignUp.css'
 import { useState } from 'react'
 import axios from 'axios'
+import { ShopContext } from '../../Context/ShopContext'
 
 
 
 function LoginSignUp() {
+
+  const {url}=useContext(ShopContext)
 
   const [state, setState] = useState("Login")
   const [formData, setFormData] = useState({
