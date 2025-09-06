@@ -21,7 +21,7 @@
   padding: 15px 30px;
   background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
-  position: relative;
+  /* position: relative; */
 }
 
 /* Logo */
@@ -50,6 +50,8 @@
   display: flex;
   gap: 25px;
   list-style: none;
+  position: relative;
+  z-index: 10;
 }
 
 .nav-menu li {
@@ -123,6 +125,7 @@
   padding: 2px 6px;
   border-radius: 50%;
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {

@@ -1,5 +1,5 @@
 const express=require('express')
-const { addProduct, removeProduct, deleteAllProducts, display, newCollection, popularInWomen, relatedProducts } = require('../controllers/product.controller')
+const { addProduct, removeProduct, deleteAllProducts, display, newCollection, popularInWomen, relatedProducts, search } = require('../controllers/product.controller')
 const multer=require('multer')
 const path = require('path');
 const router=express.Router()
@@ -36,6 +36,7 @@ router.get('/display', display)
 router.get('/newcollection',newCollection)
 router.get('/popularinwomen', popularInWomen)
 router.get('/relatedProducts/:category/:productId', relatedProducts)
+router.get('/search',search)
 // app.put('/updateProduct', async (req, res) => {
 // })
 

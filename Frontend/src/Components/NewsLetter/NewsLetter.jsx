@@ -13,7 +13,9 @@ function NewsLetter() {
         }
       })
       console.log(response.data.message)
+    
       alert("subscribed")
+      setEmail('')
     } catch (err) {
       console.log(err.message || err.response.data.message)
     }

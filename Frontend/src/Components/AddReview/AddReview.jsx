@@ -10,6 +10,7 @@ const AddReview = ({id}) => {
   const [rating,setRating]=useState(null)
   const [message,setMessage]=useState('')
   const [error,setError]=useState('')
+  const [submitting,setSubmitting]=useState(false) //debouncing
   const reviewRef=useRef(null)
   const [reviewData,setReviewData]=useState({
     name:'',
@@ -21,11 +22,14 @@ const AddReview = ({id}) => {
   const handleChange=(e)=>{
     setReviewData((prev)=>({...prev,[e.target.name]:e.target.value}))
   }
+
   const handleSubmit=async(e)=>{
     e.preventDefault()
+    if(submitting) return 
     let payload={...reviewData,rating}
      console.log(payload)
     try{
+     setSubmitting(true)
      let response=await axios.post('http://localhost:4000/review/add',payload)
      if(response.data.success){
      setMessage("Your review will be posted after being verified by the admin")
@@ -45,6 +49,8 @@ const AddReview = ({id}) => {
     }catch(err){
       setError("Something went wrong .Please Try again later")
       console.log(err.message || err.response.data.message)
+    }finally{
+      setSubmitting(false)
     }
   }
   const handleShowReview=(e)=>{
@@ -99,7 +105,9 @@ const AddReview = ({id}) => {
             onChange={handleChange} ></textarea>
         </div>
         {error && <div style={{color:"red",fontSize:"14px"}}>{error}</div>}
-        <button className='submit'>Submit Review</button>
+        <button className='submit' disabled={submitting}>
+          {submitting ? "Submitting..." : "Submit Review"}
+        </button>
      </form>
      </div>
      {message && <div style={{color:"green",fontSize:"16px"}}>{message}</div>}

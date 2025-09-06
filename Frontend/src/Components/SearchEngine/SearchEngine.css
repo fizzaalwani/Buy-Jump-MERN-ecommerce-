@@ -1,0 +1,135 @@
+.searchEngine {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.6); /* darker overlay */
+  z-index: 9999;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.searchbar {
+  height: 100%;
+  width: 380px; /* fixed width instead of vh */
+  background-color: #FFFFFF;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.search-desc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+   color: var(--color-heading);
+}
+
+.search-desc svg {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.search-input {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+ 
+}
+
+.searchbar-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  padding: 10px 14px;
+  gap: 8px;
+  background: #fafafa;
+  transition: border 0.2s ease;
+}
+
+.searchbar-input:focus-within {
+  border: 1px solid var(--color-heading);
+}
+
+.searchbar-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+
+}
+/* .searchbar-input:focus{
+ border-color: red;
+} */
+
+.searchbar-input svg {
+  font-size: 18px;
+  color: #555;
+  cursor: pointer;
+}
+
+.quick-search {
+  font-size: 14px;
+  color: #666;
+}
+
+.quick-search span {
+  font-weight: 500;
+  color: var(--color-heading);
+  color:#0a0a0a;
+}
+.search-results{
+  display: flex;
+  flex-direction: column;
+  gap:15px;
+  overflow-y: scroll;
+}
+.search-results::-webkit-scrollbar{
+  display: none;
+}
+.search-item{
+  display: flex;
+  gap:10px;
+}
+.search-item .search-image{
+  height: 130px;
+  width:120px;
+  overflow: hidden;   /* crops excess image */
+  flex-shrink: 0;  
+}
+.search-item .search-image img{
+  height: 100%;
+  width:100%;
+  object-fit: cover;
+  display: block;
+}
+
+.search-item .search-info{
+  display: flex;
+  flex-direction: column;
+  gap:8px;
+  font-size: 14px;
+  color: #0a0a0a;
+  color:var(--color-heading);
+  font-weight: 500;
+}
+.search-info .old{
+  text-decoration: line-through;
+}
+.search-info :nth-child(2){
+  display: flex;
+  gap:6px;
+  color:var(--color-body);
+  font-size: 16px;
+  font-weight: 400;
+}

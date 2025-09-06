@@ -1,21 +1,51 @@
-const productModel=require('../models/productmodel')
-const reviewModel=require('../models/reviewmodel')
+const productModel = require('../models/productmodel')
+const reviewModel = require('../models/reviewmodel')
 
-module.exports.getReview=async (req, res) => {
+// module.exports.getReview=async (req, res) => {
+//     try {
+//         console.log("hey im running")
+//         const productId = req.params.productId
+//         console.log(productId)
+//         let existingProduct = await productModel.findOne({ _id: productId })
+//         if (!existingProduct) return res.status(404).json({ success: false, message: "Product not found" })
+//         let reviews = await reviewModel.find({ productId: productId, approved: true })
+//         res.status(200).json({ success: true, reviews })
+//     } catch (err) {
+//         res.status(500).json({ success: false, message: err.message });
+//     }
+// }
+module.exports.getReview = async (req, res) => {
     try {
         console.log("hey im running")
         const productId = req.params.productId
-        console.log(productId)
+        const page = Number(req.query.page)
+        const limit = Number(req.query.limit) || 6
+       const skip = (page - 1) * limit
+
+       console.log(productId, "Page:", page, "Limit:", limit, "Skip:", skip)
+       
         let existingProduct = await productModel.findOne({ _id: productId })
         if (!existingProduct) return res.status(404).json({ success: false, message: "Product not found" })
-        let reviews = await reviewModel.find({ productId: productId, approved: true })
-        res.status(200).json({ success: true, reviews })
+
+        let totalReviews = await reviewModel.countDocuments({ productId, approved: true })
+
+        let reviews = await reviewModel.find({ productId: productId, approved: true }).skip(skip).limit(limit).sort({ createdAt: -1 })
+        console.log("Reviews : " ,reviews)
+
+        res.status(200).json({
+            success: true, reviews, pagination: {
+                totalReviews,
+                currentPage: page,
+                totalPages: Math.ceil(totalReviews / limit)
+            }
+        })
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
     }
 }
 
-module.exports.addReview= async (req, res) => {
+
+module.exports.addReview = async (req, res) => {
     try {
         const { name, email, review, rating, productId } = req.body
         console.log(req.body)
@@ -38,14 +68,14 @@ module.exports.addReview= async (req, res) => {
     }
 }
 
-module.exports.approveReview=async (req, res) => {
+module.exports.approveReview = async (req, res) => {
     try {
         const reviewId = req.params.reviewId
-        const existingReview = await reviewModel.findById(reviewId )
+        const existingReview = await reviewModel.findById(reviewId)
         if (!existingReview) return res.status(404).json({ success: false, message: "Review not found" })
         existingReview.approved = true
         await existingReview.save()
-        res.json({success:true,messgae:"review approved"})
+        res.json({ success: true, messgae: "review approved" })
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
     }

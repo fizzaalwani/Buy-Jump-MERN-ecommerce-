@@ -4,11 +4,14 @@ import logo from '../../assets/Frontend_Assets/logo.png';
 import cart_icon from '../../assets/Frontend_Assets/cart_icon.png';
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
+import { IoMdSearch } from "react-icons/io";
 import dropdown_icon from '../../assets/Frontend_Assets/dropdown_icon.png'
+import SearchEngine from '../SearchEngine/SearchEngine';
 
 
-function Navbar() {
+function Navbar({setShowSearchBar}) {
     const [menu,setMenu]=useState('Shop')
+    // const [showSearchBar,setShowSearchBar]=useState(false)
     const {getNoOfCartItems}=useContext(ShopContext)
     const navMenuRef=useRef(null)
 
@@ -43,7 +46,10 @@ function Navbar() {
           <img src={cart_icon} alt="Cart Icon" />
           <span className="cart-count">{getNoOfCartItems()}</span>
           </div></Link>
+            <div onClick={()=>setShowSearchBar(prev=>!prev)}><IoMdSearch size={24}
+            style={{color:"var(--color-heading)"}} className='search-icon'/></div>
      </div>
+   
 
     </div>
   )

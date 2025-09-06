@@ -164,3 +164,28 @@ module.exports.relatedProducts=async (req, res) => {
         })
     }
 }
+
+module.exports.search=async(req,res)=>{
+    try{
+    let {query}=req.query
+
+    if(!query || query.trim()==='') return res.status(400).json({success:false,message:"search query is required"})
+    
+        let products=await productModel.find({
+            $or:[
+                {name:{$regex:query,$options:'i'}},
+                {description:{$regex:query,$options:'i'}},
+                {category:{$regex:query,$options:'i'}}
+            ]
+        }).limit(10)
+        // if(products.length==0) return res.status(404).json({success:false,message:"No products matched"})
+
+        res.status(200).json({products})
+
+    }catch(err){
+          res.status(500).json({
+            success: false,
+            message: err.message
+        })
+    }
+}

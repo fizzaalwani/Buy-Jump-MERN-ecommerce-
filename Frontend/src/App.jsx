@@ -14,18 +14,26 @@ import kids_banner from './assets/Frontend_Assets/banner_kids.png'
 import Footer from './Components/Footer/Footer'
 import Cart from './Pages/Cart/Cart'
 import NotFound from './Components/NotFound/NotFound'
-
-
-
+import SearchEngine from './Components/SearchEngine/SearchEngine'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showSearchBar,setShowSearchBar]=useState(false)
+
+//   useEffect(() => {
+//   if (showSearchBar) {
+//     document.body.style.overflow = "hidden"; // stop scrolling
+//   } else {
+//     document.body.style.overflow = "auto"; // restore scroll
+//   }
+// }, [showSearchBar]);
 
   return (
     <>
+    <div className='app'>
       <BrowserRouter>
-        <Navbar />
+      {showSearchBar && <SearchEngine setShowSearchBar={setShowSearchBar}/>}
+        <Navbar  setShowSearchBar={setShowSearchBar}/>
         <Routes>
           <Route path='/' element={<Shop/>}></Route>
           <Route path='/men' element={<ShopCategory banner={men_banner} category="men" />}></Route>
@@ -38,7 +46,7 @@ function App() {
         </Routes>
         <Footer/>
       </BrowserRouter>
-
+</div>
     </>
   )
 }
