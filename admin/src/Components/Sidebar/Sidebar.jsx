@@ -20,6 +20,13 @@ function Sidebar() {
         <p>Display Product</p>
         </Link>
        </div>
+
+        <div className="display-p">
+       <Link to='/voucher' style={{textDecoration:"none"}}>
+        <img src={display_produt} alt="" />
+        <p>Vouchers</p>
+        </Link>
+       </div>
     </div>
   )
 }
