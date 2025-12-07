@@ -141,6 +141,7 @@ module.exports.popularInWomen=async (req, res) => {
     try {
         let products = await productModel.find({}).sort({ _id: 1 }).limit(4)
         res.send(products)
+        console.log(products)
     } catch (err) {
         res.status(500).json({
             success: false,

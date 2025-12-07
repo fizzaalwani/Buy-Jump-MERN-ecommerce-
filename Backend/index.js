@@ -10,9 +10,11 @@ const product=require('./routes/product.route')
 const review=require('./routes/review.route')
 const user=require('./routes/user.route')
 const voucher=require('./routes/voucher.route')
+const media=require('./routes/media.route')
 
 
 require('dotenv').config()
+
 
 
 // Middlewares
@@ -27,6 +29,7 @@ app.use('/product',product)
 app.use('/review',review)
 app.use('/user',user)
 app.use('/voucher',voucher)
+app.use('/media',media)
 
 
 // API Endpoints

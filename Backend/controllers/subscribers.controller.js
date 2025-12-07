@@ -10,6 +10,8 @@ module.exports.addSubscriber= async (req, res) => {
         }
 
         await subsModel.create({ email: email })
+      
+        await sendEmail(email, "Subscriber alert from Buy-Jump", "Welcome to our NewLetter.We are happy ho have you on this journey with us.Stay tuned for updates")
 
         return res.json({ message: "Subscriber added" })
     } catch (err) {
@@ -28,7 +30,7 @@ module.exports.sendEmail=async (req, res) => {
         const subscribers = await subsModel.find({}, 'email -_id')
         let recipients = subscribers.map(s => s.email)
 
-        sendEmail(recipients, "Subscriber alert from Buy-Jump", "We are delighted to imform you of our latest summer collection that has been introduced with an exclusive discount of 15% for our new subscribers say hi to fizza")
+        await sendEmail(recipients, "Subscriber alert from Buy-Jump", "We are delighted to imform you of our latest summer collection that has been introduced with an exclusive discount of 15% for our new subscribers say hi to fizza")
 
         res.json({ success: true, message: 'Mail sent to all subscribers' });
     } catch (err) {

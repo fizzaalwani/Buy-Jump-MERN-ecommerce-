@@ -12,7 +12,8 @@ function Popular() {
     const fetchPopular=async()=>{
       let response=await axios.get("http://localhost:4000/product/popularinwomen")
         setPopular(response.data)
-        console.log(response.data)
+        console.log("Popular in women response : ",response)
+        console.log("Popular in Women :",response.data)
       
     }
     fetchPopular()
