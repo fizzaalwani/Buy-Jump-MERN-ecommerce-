@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import './CartItems.css';
 import { ShopContext } from '../../Context/ShopContext';
 import remove_icon from '../../assets/Frontend_Assets/cart_cross_icon.png';
@@ -6,10 +6,12 @@ import remove_icon from '../../assets/Frontend_Assets/cart_cross_icon.png';
 function CartItems() {
   const { products, cartItems, removeFromCart,getCartTotal } = useContext(ShopContext);
 
-  const subtotal = Object.keys(cartItems).reduce((total, id) => {
+  const subtotal =useMemo(()=>{
+    return  Object.keys(cartItems).reduce((total, id) => {
     const product = products.find(p => p.id === Number(id));
     return total + (product ? product.new_price * cartItems[id] : 0);
   }, 0);
+  },[products,cartItems])
 
   return (
     <div className='cartItems'>
